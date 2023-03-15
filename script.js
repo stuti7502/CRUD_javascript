@@ -2,15 +2,15 @@ var selectrow = null;
 document.querySelector("#details").addEventListener("submit", (e) =>{
     e.preventDefault();
 
-    const id = document.querySelector("#id").value;
-    const pname = document.querySelector("#name").value;
-    const price = document.querySelector("#price").value;
-    const photo = document.querySelector("#photo").value;
+    let id = document.querySelector("#id").value;
+    let pname = document.querySelector("#name").value;
+    let price = document.querySelector("#price").value;
+    let photo = document.querySelector("#photo").value;
 
     if(selectrow == null){
         const list = document.querySelector("#product-list");
         const row = document.createElement("tr");
-
+        
         row.innerHTML = `
             <td>${id}</td>
             <td>${pname}</td>
@@ -31,6 +31,7 @@ document.querySelector("#details").addEventListener("submit", (e) =>{
     }
 });
 
+  
 document.querySelector('#product-list').addEventListener("click", (e) =>{
     if(e.target.classList.contains("edit")){
         selectrow = e.target.parentElement.parentElement;
