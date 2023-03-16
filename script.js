@@ -1,70 +1,70 @@
-function addData(){
-  if(validateForm() == true)
-var selectrow = null;
-document.querySelector("#details").addEventListener("submit", (e) =>{
-    e.preventDefault();
-    let id = document.querySelector("#id").value;
-    let pname = document.querySelector("#pname").value;
-    let price = document.querySelector("#price").value;
-    let photo = document.querySelector("#photo").value;
-    // console.log("ID:",id);
+// function addData(){
+//   if(validateForm() == true)
+// var selectrow = null;
+// document.querySelector("#details").addEventListener("submit", (e) =>{
+//     e.preventDefault();
+//     let id = document.querySelector("#id").value;
+//     let pname = document.querySelector("#pname").value;
+//     let price = document.querySelector("#price").value;
+//     let photo = document.querySelector("#photo").value;
+//     // console.log("ID:",id);
 
-    if(selectrow == null){
-        const list = document.querySelector("#product-list");
-        const row = document.createElement("tr");
-        var productList;
-        if(localStorage.getItem("productList") == null){
-          productList = [];
-        }
-        else{
-          productList = JSON.parse(localStorage.getItem("productList"))
-        }
+//     if(selectrow == null){
+//         const list = document.querySelector("#product-list");
+//         const row = document.createElement("tr");
+//         var productList;
+//         if(localStorage.getItem("productList") == null){
+//           productList = [];
+//         }
+//         else{
+//           productList = JSON.parse(localStorage.getItem("productList"))
+//         }
         
-        productList.push({
-          id: id,
-          pname: pname,
-          price: price,
-          photo: photo,
-        });
+//         productList.push({
+//           id: id,
+//           pname: pname,
+//           price: price,
+//           photo: photo,
+//         });
     
     
-          localStorage.setItem("productList", JSON.stringify(productList));
-    row.innerHTML = `
-            <td>${id}</td>
-            <td>${pname}</td>
-            <td>${price}</td>
-            <td><img src="${photo}"></td>
-            <td><a href="#" class="btn btn-primary edit">Edit</a></td>
-            <td><a href="#" class="btn btn-danger delete">Delete</a></td>
-        `
-        ;
-        // localStorage.setItem("id", id);
-        list.appendChild(row);
-        selectrow=null;
-      }
-    else{
-        selectrow = null;
-    }
+//           localStorage.setItem("productList", JSON.stringify(productList));
+//     row.innerHTML = `
+//             <td>${id}</td>
+//             <td>${pname}</td>
+//             <td>${price}</td>
+//             <td><img src="${photo}"></td>
+//             <td><a href="#" class="btn btn-primary edit">Edit</a></td>
+//             <td><a href="#" class="btn btn-danger delete">Delete</a></td>
+//         `
+//         ;
+//         // localStorage.setItem("id", id);
+//         list.appendChild(row);
+//         selectrow=null;
+//       }
+//     else{
+//         selectrow = null;
+//     }
   
-}
-);
-}
+// }
+// );
+// }
   
-document.querySelector('#product-list').addEventListener("click", (e) =>{
-    if(e.target.classList.contains("edit")){
-        selectrow = e.target.parentElement.parentElement;
-        document.querySelector("#id").value = selectrow.children[0].textContent;
-        document.querySelector("#pname").value = selectrow.children[1].textContent;
-        document.querySelector("#price").value = selectrow.children[2].textContent;
-        document.querySelector("#photo").value = selectrow.children[3].textContent;
-    }
-})
+// document.querySelector('#product-list').addEventListener("click", (e) =>{
+//     if(e.target.classList.contains("edit")){
+//         selectrow = e.target.parentElement.parentElement;
+//         document.querySelector("#id").value = selectrow.children[0].textContent;
+//         document.querySelector("#pname").value = selectrow.children[1].textContent;
+//         document.querySelector("#price").value = selectrow.children[2].textContent;
+//         document.querySelector("#photo").value = selectrow.children[3].textContent;
+//     }
+// })
 
-document.querySelector('#product-list').addEventListener("click", (e) =>{
-    if(e.target.classList.contains("delete")){
-        e.target.parentElement.parentElement.remove();
-    }
-})
+// document.querySelector('#product-list').addEventListener("click", (e) =>{
+//     if(e.target.classList.contains("delete")){
+//         e.target.parentElement.parentElement.remove();
+//     }
+// })
 
 function validateForm(){
   let id = document.querySelector("#id").value;
@@ -110,55 +110,43 @@ function show(){
     list += "<td>"+element.pname+"</td>";
     list += "<td>"+element.price+"</td>";
     list += `<td><img src="${element.photo}"</td>`;
-    list += '<td><button class="btn btn-primary edit">Edit</button></td>'
-    list += '<td><button class="btn btn-primary delete">Delete</button></td>'
+    list += '<td><button class="btn btn-primary edit">Edit</button></td>';
+    list += '<td><button class="btn btn-primary delete">Delete</button></td>';
     list += "</tr>";
   });
   document.querySelector('#product-list').innerHTML = list;
 }
 document.onload = show();
 
-// function addData(){
-//   if(validateForm() == true){
-//     var id = document.querySelector("#id").value;
-//     var pname = document.querySelector("#pname").value;
-//     var price = document.querySelector("#price").value;
-//     var photo = document.querySelector("#photo").value;
-//     var selectrow;
-//     if(selectrow == null){
-//     const list = document.querySelector("#product-list");
-//     const row = document.createElement("tr");
-    
-//     var productList;
-//     if(localStorage.getItem("productList") == null){
-//       productList = [];
-//     }
-//     else{
-//       productList = JSON.parse(localStorage.getItem("productList"))
-//     }
+function addData(){
+  if(validateForm() == true){
+    var id = document.querySelector("#id").value;
+    var pname = document.querySelector("#pname").value;
+    var price = document.querySelector("#price").value;
+    var photo = document.querySelector("#photo").value;
+    var productList;
+    if(localStorage.getItem("productList") == null){
+      productList = [];
+    }
+    else{
+      productList = JSON.parse(localStorage.getItem("productList"))
+    }
   
-//     productList.push({
-//       id: id,
-//       pname: pname,
-//       price: price,
-//       photo: photo,
-//     });
-//     localStorage.setItem("productList", JSON.stringify('productList'));
-//     show();
-//     row.innerHTML = `
-//           <td>${id}</td>
-//              <td>${pname}</td>
-//              <td>${price}</td>
-//              <td><img src="${photo}"></td>
-//              <td><a href="#" class="btn btn-primary edit">Edit</a></td>
-//              <td><a href="#" class="btn btn-danger delete">Delete</a></td>
-//          `
-//          ;
-// //         // localStorage.setItem("id", id);
-//      list.appendChild(row);
-//   }
-// }
-// }
+    productList.push({
+      id: id,
+      pname: pname,
+      price: price,
+      photo: photo,
+    });
+    localStorage.setItem("productList", JSON.stringify('productList'));
+    show();
+    document.getElementById('id').value ="";
+    document.getElementById('pname').value ="";
+    document.getElementById('price').value ="";
+    document.getElementById('photo').value ="";
+  
+}
+}
 function asc(n){
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("sort-table");
