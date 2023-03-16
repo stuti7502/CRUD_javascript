@@ -12,25 +12,25 @@
     <body class="bg-dark">
         <div class="card mt-3 mb-3 bg-dark"  style="width: 50rem;">
             <div class="card-body">
-            <form id="details">
+            <form id="details" name="details">
             <h4 class="card-title text-white">Add Products</h4>
             <div class="input-group">
                 <span class="input-group-text">Product id </span>
-                <input type="number" aria-label="product id" class="form-control" id="id" required>
+                <input type="text" aria-label="product id" class="form-control" id="id" name="pid">
             </div><br>
             <div class="input-group">
                 <span class="input-group-text">Product name</span>
-                <input type="text" aria-label="product name" class="form-control" id="name" required>
+                <input type="text" aria-label="product name" class="form-control" id="pname" name="pname">
             </div><br>
             <div class="input-group">
                 <span class="input-group-text">Product Price</span>
-                <input type="number" aria-label="product price" class="form-control" id="price" required>
+                <input type="text" aria-label="product price" class="form-control" id="price" name="price">
             </div><br>
             <div class="input-group">
                 <span class="input-group-text">Product Photo</span>
-                <input type="url" aria-label="product photo" class="form-control" id="photo" required>
+                <input type="url" aria-label="product photo" class="form-control" id="photo" name="photo">
             </div><br>
-            <button type="submit" class="btn btn-info" value="submit" id="submit">Add</button>
+            <button type="submit" class="btn btn-info" value="submit" id="submit" onclick="addData()">Add</button>
         </form>
             </div>
         </div>
