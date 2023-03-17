@@ -2,35 +2,38 @@
 <html>
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://kit.fontawesome.com/5594ca95a7.js" crossorigin="anonymous"></script>
+        
     <style>
         th{
             cursor: pointer;
         }
+       
     </style>
     </head>
     <body class="bg-dark">
+        <span class="m-4"><h4 class="text-white">Add Products<input type="text" id="searchbar" placeholder="search here.." onkeyup="searchid()" style="float: right; font-size: 20px; width: 400px; margin-right: 50px;"></h4></body>span>
         <div class="card mt-3 mb-3 bg-dark"  style="width: 50rem;">
             <div class="card-body">
-            <form id="details" name="details">
-            <h4 class="card-title text-white">Add Products</h4>
+            <form id="details">
+            <h4 class="card-title text-white">
             <div class="input-group">
                 <span class="input-group-text">Product id </span>
-                <input type="text" aria-label="product id" class="form-control" id="id" name="pid">
+                <input type="text" aria-label="product id" class="form-control" id="id">
             </div><br>
             <div class="input-group">
                 <span class="input-group-text">Product name</span>
-                <input type="text" aria-label="product name" class="form-control" id="pname" name="pname">
+                <input type="text" aria-label="product name" class="form-control" id="pname">
             </div><br>
             <div class="input-group">
                 <span class="input-group-text">Product Price</span>
-                <input type="text" aria-label="product price" class="form-control" id="price" name="price">
+                <input type="text" aria-label="product price" class="form-control" id="price">
             </div><br>
             <div class="input-group">
                 <span class="input-group-text">Product Photo</span>
-                <input type="url" aria-label="product photo" class="form-control" id="photo" name="photo">
+                <input type="url" aria-label="product photo" class="form-control" id="photo">
             </div><br>
             <button type="submit" class="btn btn-info" value="submit" id="submit" onclick="addData()">Add</button>
+            <button class="btn btn-info" style="display: none;" id="update">Update</button>
         </form>
             </div>
         </div>
@@ -60,8 +63,9 @@
             
             </tbody>
         </table>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/5594ca95a7.js" crossorigin="anonymous"></script>
         
     </body>
 </html>
