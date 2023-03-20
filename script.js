@@ -15,17 +15,17 @@ function validateForm(){
       alert("Enter number in id")
     }
     if(pname==""){
-      alert("pname required");
+      alert("Name required");
       return false;    
     }
     if(price==""){
-      alert("price required");
+      alert("Price required");
       return false;    
     }else if(isNaN(price)){
       alert("Enter number in price")
     }
     if(photo==""){
-      alert("photo required");
+      alert("Photo required");
       return false;    
     }
     
@@ -33,7 +33,7 @@ function validateForm(){
 }
 
 function addData() {
-  // if(validateForm() == true){
+  if(validateForm() == true){
   var product;
   if (localStorage.getItem('productArray') == null) {
     product = [];
@@ -57,7 +57,7 @@ function addData() {
 
   location.reload();
 });
-// }
+}
 }
 
 
@@ -107,7 +107,35 @@ function deleteData(index){
     location.reload();
   }
 }
+// function onEdit(this){
+//   let product;
+//     if (localStorage.getItem("productArray") == null) {
+//         product = [];
+//     }
+//     else {
+//         product = JSON.parse(localStorage.getItem("productArray"));
+//     }
+//   selectedRow = td.parentElement.parentElement;
+//   document.getElementById('id').value = selectedRow.cells[0].innerHTML;
+//     document.getElementById('pname').value = selectedRow.cells[1].innerHTML;
+//     document.getElementById('price').value = selectedRow.cells[2].innerHTML;
+//     document.getElementById('photo').value = selectedRow.cells[3].innerHTML;
+// }
 
+// function updateRecord(product){
+//   let product;
+//     if (localStorage.getItem("productArray") == null) {
+//         product = [];
+//     }
+//     else {
+//         product = JSON.parse(localStorage.getItem("productArray"));
+//     }
+//   selectedRow.cells[0].innerHTML = product.id;
+//   selectedRow.cells[1].innerHTML = product.pname;
+//   selectedRow.cells[2].innerHTML = product.price;
+//   selectedRow.cells[3].innerHTML = product.photos;
+//   localStorage.setItem('productArray', JSON.stringify(product));
+// }
 function updateData(index){
   document.getElementById('submit').style.display = "none";
   document.getElementById('update').style.display = "block";
@@ -148,14 +176,49 @@ function updateData(index){
       // document.getElementById('id').value = "";
       // document.getElementById('pname').value = "";
       // document.getElementById('price').value = "";
-      // // document.getElementById('photo').value = "";
+      // document.getElementById('photo').value = "";
 
       document.getElementById('submit').style.display = "block";
       document.getElementById('update').style.display = "none";
     })}
   }
     
+  // function updateData(index) {
+  //   document.getElementById('submit').style.display = "none";
+  //  document.getElementById('update').style.display = "block";
+  //   let productInfo = JSON.parse(localStorage.getItem('productArray'))[index];
+  //   document.getElementById('id').value = productInfo.id;
+  //   document.getElementById('pname').value = productInfo.name;
+  //   editImage = productInfo.photo;
+  //   document.getElementById('price').value = productInfo.price;
+  //   // document.querySelector("#update").onclick = function(){
+  //   let idx = editIndex;
+  //   let id = document.getElementById('id').value;
+  //   let name = document.getElementById('pname').value;
+  //   let photo = document.getElementById('photo');
+  //   let price = document.getElementById('price').value;
+    
+    
+  //   if (photo.value != '') {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(photo.files[0]);
+  //     reader.addEventListener('load', () => {
+  //       let url = reader.result;
+  //       let updatedData = { id, name, price, photo: url};
+  //       let productInfo = JSON.parse(localStorage.getItem('productArray'));
+  //       productInfo[idx] = updatedData;
+  //       localStorage.setItem('productArray', JSON.stringify(productInfo));
+  //     });
+  //   } else {
+  //     let updatedData = { id, name, price, photo: editImage};
+  //     let productInfo = JSON.parse(localStorage.getItem('productArray'));
+  //     productInfo[idx] = updatedData;
+  //     localStorage.setItem('productArray', JSON.stringify(productInfo));
+  //   }
+  //   editIndex = null;
+  //   location.reload();
   // }
+// }
 
 
 
@@ -252,4 +315,3 @@ function asc(n){
     down2.style.display = "inline"; up2.style.display = "inline";    
   }     
 }
-
