@@ -3,6 +3,7 @@ let pName = document.getElementById('pname');
 let pImage = document.getElementById('photo');
 let pPrice = document.getElementById('price');
 
+//validating form
 function validateForm(){
     let id = document.querySelector("#id").value;
     let pname = document.querySelector("#pname").value;
@@ -32,6 +33,7 @@ function validateForm(){
     return true;
 }
 
+//inserting data
 function addData() {
   if(validateForm() == true){
   var product;
@@ -63,7 +65,7 @@ function addData() {
 
 viewData();
 
-
+//displaying data
 function viewData(){
   
     let product;
@@ -92,6 +94,8 @@ function viewData(){
   
 }
 
+
+// delete data
 function deleteData(index){
   let product;
   if (localStorage.getItem("productArray") == null) {
@@ -107,121 +111,49 @@ function deleteData(index){
     location.reload();
   }
 }
-// function onEdit(this){
-//   let product;
-//     if (localStorage.getItem("productArray") == null) {
-//         product = [];
-//     }
-//     else {
-//         product = JSON.parse(localStorage.getItem("productArray"));
-//     }
-//   selectedRow = td.parentElement.parentElement;
-//   document.getElementById('id').value = selectedRow.cells[0].innerHTML;
-//     document.getElementById('pname').value = selectedRow.cells[1].innerHTML;
-//     document.getElementById('price').value = selectedRow.cells[2].innerHTML;
-//     document.getElementById('photo').value = selectedRow.cells[3].innerHTML;
-// }
-
-// function updateRecord(product){
-//   let product;
-//     if (localStorage.getItem("productArray") == null) {
-//         product = [];
-//     }
-//     else {
-//         product = JSON.parse(localStorage.getItem("productArray"));
-//     }
-//   selectedRow.cells[0].innerHTML = product.id;
-//   selectedRow.cells[1].innerHTML = product.pname;
-//   selectedRow.cells[2].innerHTML = product.price;
-//   selectedRow.cells[3].innerHTML = product.photos;
-//   localStorage.setItem('productArray', JSON.stringify(product));
-// }
-function updateData(index){
-  document.getElementById('submit').style.display = "none";
-  document.getElementById('update').style.display = "block";
-  
-  let product;
-  if (localStorage.getItem("productArray") == null) {
-      product = [];
+ 
+// take the data itno the form
+function updateData(index) {
+    document.getElementById('submit').style.display = "none";
+   document.getElementById('update').style.display = "block";
+    let productInfo = JSON.parse(localStorage.getItem('productArray'))[index];
+    document.getElementById('id').value = productInfo.id;
+    document.getElementById('pname').value = productInfo.name;
+    editImage = productInfo.photo;
+    document.getElementById('price').value = productInfo.price;
+    editIndex = index;
+}
+//after changing, update the data
+function save()
+{
+    let idx = editIndex;
+    let id = document.getElementById('id').value;
+    let name = document.getElementById('pname').value;
+    let photo = document.getElementById('photo');
+    let price = document.getElementById('price').value;
+    
+    
+    if (photo.value != '') {
+      const reader = new FileReader();
+      reader.readAsDataURL(photo.files[0]);
+      reader.addEventListener('load', () => {
+        let url = reader.result;
+        let updatedData = { id, name, price, photo: url};
+        let productInfo = JSON.parse(localStorage.getItem('productArray'));
+        productInfo[idx] = updatedData;
+        localStorage.setItem('productArray', JSON.stringify(productInfo));
+      });
+    } else {
+      let updatedData = { id, name, price, photo: editImage};
+      let productInfo = JSON.parse(localStorage.getItem('productArray'));
+      productInfo[idx] = updatedData;
+      localStorage.setItem('productArray', JSON.stringify(productInfo));
+    }
+    editIndex = null;
+    location.reload();
   }
-  else {
-      product = JSON.parse(localStorage.getItem("productArray"));
-  }
-  // let reader = new FileReader();
-  //   reader.readAsDataURL(pImage.files[0]);
-  //   reader.addEventListener('load', () => {
-  //   let photos = reader.result;
-    
-    document.getElementById('id').value = product[index].id;
-    document.getElementById('pname').value = product[index].name;
-    document.getElementById('price').value = product[index].price;
-    document.getElementById('photo').value = null;
-  // })
-  document.querySelector("#update").onclick = function(){
-    
-    // if(validateForm() == true){  
-    let reader = new FileReader();
-    reader.readAsDataURL(pImage.files[0]);
-    reader.addEventListener('load', () => {
-      let photos = reader.result;
-      product[index].id = document.getElementById('id').value;
-      product[index].name = document.getElementById('pname').value;
-      product[index].price = document.getElementById('price').value;
-      product[index].photo = photos;
 
-      localStorage.setItem('productArray', JSON.stringify(product));
-
-      viewData();
-
-      // document.getElementById('id').value = "";
-      // document.getElementById('pname').value = "";
-      // document.getElementById('price').value = "";
-      // document.getElementById('photo').value = "";
-
-      document.getElementById('submit').style.display = "block";
-      document.getElementById('update').style.display = "none";
-    })}
-  }
-    
-  // function updateData(index) {
-  //   document.getElementById('submit').style.display = "none";
-  //  document.getElementById('update').style.display = "block";
-  //   let productInfo = JSON.parse(localStorage.getItem('productArray'))[index];
-  //   document.getElementById('id').value = productInfo.id;
-  //   document.getElementById('pname').value = productInfo.name;
-  //   editImage = productInfo.photo;
-  //   document.getElementById('price').value = productInfo.price;
-  //   // document.querySelector("#update").onclick = function(){
-  //   let idx = editIndex;
-  //   let id = document.getElementById('id').value;
-  //   let name = document.getElementById('pname').value;
-  //   let photo = document.getElementById('photo');
-  //   let price = document.getElementById('price').value;
-    
-    
-  //   if (photo.value != '') {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(photo.files[0]);
-  //     reader.addEventListener('load', () => {
-  //       let url = reader.result;
-  //       let updatedData = { id, name, price, photo: url};
-  //       let productInfo = JSON.parse(localStorage.getItem('productArray'));
-  //       productInfo[idx] = updatedData;
-  //       localStorage.setItem('productArray', JSON.stringify(productInfo));
-  //     });
-  //   } else {
-  //     let updatedData = { id, name, price, photo: editImage};
-  //     let productInfo = JSON.parse(localStorage.getItem('productArray'));
-  //     productInfo[idx] = updatedData;
-  //     localStorage.setItem('productArray', JSON.stringify(productInfo));
-  //   }
-  //   editIndex = null;
-  //   location.reload();
-  // }
-// }
-
-
-
+//search by product id
 function searchid(){
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("searchbar");
@@ -240,6 +172,8 @@ function searchid(){
     }       
   }
 }
+
+//sort the columns
 function asc(n){
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("sort-table");
