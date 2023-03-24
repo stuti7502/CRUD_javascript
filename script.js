@@ -2,6 +2,7 @@ let pId = document.getElementById('id');
 let pName = document.getElementById('pname');
 let pImage = document.getElementById('photo');
 let pPrice = document.getElementById('price');
+let pDescription = document.getElementById('description');
 
 //validating form
 function validateForm(){
@@ -51,6 +52,7 @@ function addData() {
     id: pId.value,
     name: pName.value,
     price: pPrice.value,
+    description: pDescription,
     photo: photos,
     
   });
@@ -81,6 +83,7 @@ function viewData(){
         html += `<td>${element.id}</td>`
         html += `<td>${element.name}</td>`
         html += `<td>${element.price}</td>`
+        html += `<td>${element.description}</td>`
         html += `<td><div style="width:150px; height:100px;"><img style="max-width: 100%; max-height:100%;" src="${element.photo}"/></div></td>`
         html += `<td><button type="button" class="btn btn-primary" onclick='updateData(${index})'><i class="fa fa-pencil" aria-hidden="true"></i></button></td>`
         html += `<td><button type="button" class="btn btn-danger" onclick='deleteData(${index})'><i class="fa fa-trash" aria-hidden="true"></i></button></td>`
@@ -121,6 +124,7 @@ function updateData(index) {
     document.getElementById('pname').value = productInfo.name;
     editImage = productInfo.photo;
     document.getElementById('price').value = productInfo.price;
+    document.getElementById('description').value = productInfo.description;
     editIndex = index;
 }
 //after changing, update the data
@@ -131,6 +135,7 @@ function save()
     let name = document.getElementById('pname').value;
     let photo = document.getElementById('photo');
     let price = document.getElementById('price').value;
+    let description = document.getElementById('description').value;
     
     
     if (photo.value != '') {
@@ -138,13 +143,13 @@ function save()
       reader.readAsDataURL(photo.files[0]);
       reader.addEventListener('load', () => {
         let url = reader.result;
-        let updatedData = { id, name, price, photo: url};
+        let updatedData = { id, name, price, description, photo: url};
         let productInfo = JSON.parse(localStorage.getItem('productArray'));
         productInfo[idx] = updatedData;
         localStorage.setItem('productArray', JSON.stringify(productInfo));
       });
     } else {
-      let updatedData = { id, name, price, photo: editImage};
+      let updatedData = { id, name, price, description, photo: editImage};
       let productInfo = JSON.parse(localStorage.getItem('productArray'));
       productInfo[idx] = updatedData;
       localStorage.setItem('productArray', JSON.stringify(productInfo));
