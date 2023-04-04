@@ -28,6 +28,10 @@ function validateForm(){
     }else if(id !== ""){
       document.getElementById('errorid').textContent = ""
     }
+    if(id < 0){
+      document.getElementById('errorid').textContent = "ID cannot be less than 0"
+      flag = false;
+    }
     for (let prod of product) {
         if (id === prod.id) {
           document.getElementById('errorid').textContent = "ID already exists";
@@ -49,6 +53,10 @@ function validateForm(){
       flag = false;
     }else if(price !== ""){
       document.getElementById('errorprice').textContent = ""
+    }
+    if(price < 0){
+      document.getElementById('errorprice').textContent = "Price cannot be less than 0"
+      flag = false;
     }
     if(pdescription==""){
       document.getElementById('errordesc').textContent = "Description required"
