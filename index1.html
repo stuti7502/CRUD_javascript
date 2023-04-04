@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <title>CRUD operations</title>
+    <style>
+        
+       
+        .input-group + div{
+            color: red;
+            font-size: 18px;
+        }
+        h4{
+            padding-left: 20px;
+        }
+    </style>
+    </head>
+    <body class="bg-dark ">
+        <span class="m-4"><h4 class="text-white">Add Products<button class="btn btn-info" style="margin-left: 490px;"onclick="location.href='index.html'">View Products</button></h4></span>
+        
+        <div class="card mt-3 mb-3 bg-dark"  style="width: 50rem;">
+            <div class="card-body">
+            <form id="details">
+            <!-- <h4 class="card-title text-white"> -->
+            <div class="input-group">
+                <span class="input-group-text">Product ID    </span>
+                <input type="text" aria-label="product id" class="form-control" id="id">
+            </div><div id="errorid"></div><br>
+            <div class="input-group">
+                <span class="input-group-text">Product Name</span>
+                <input type="text" aria-label="product name" class="form-control" id="pname">
+            </div><div id="errorname"></div><br>
+            <div class="input-group">
+                <span class="input-group-text">Product Price</span>
+                <input type="text" aria-label="product price" class="form-control" id="price">
+            </div><div id="errorprice"></div><br>
+            <div class="input-group">
+                <span class="input-group-text">Product Photo</span>
+                <input type="file" aria-label="product photo" class="form-control" id="photo">
+            </div><div id="errorphoto"></div><br>
+            <div class="input-group">
+                <span class="input-group-text">Product Description</span>
+                <input type="text" aria-label="product description" class="form-control" id="description">
+            </div><div id="errordesc"></div><br>
+            <button type="button" class="btn btn-primary" value="submit" id="submit" onclick="addData()">Add</button>
+            <button class="btn btn-danger m-4" id="clear1" onclick="clear1()">Clear</button>
+        </form>
+            </div>
+        </div>
+        
+        <script src="script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/5594ca95a7.js" crossorigin="anonymous"></script>
+        
+    </body>
+</html>

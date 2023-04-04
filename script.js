@@ -4,39 +4,102 @@ let pImage = document.getElementById('photo');
 let pPrice = document.getElementById('price');
 let pDescription = document.getElementById('description');
 
+let product;
+if (localStorage.getItem("productArray") == null) {
+  product = [];
+} else {
+  product = JSON.parse(localStorage.getItem("productArray"));
+}
 //validating form
 function validateForm(){
     let id = document.querySelector("#id").value;
     let pname = document.querySelector("#pname").value;
     let price = document.querySelector("#price").value;
     let photo = document.querySelector("#photo").value;
+    let pdescription = document.querySelector("#description").value;
+    let flag = true;
     if(id==""){
-      alert("id required");
-      return false;    
-    }else if(isNaN(id)){
-      alert("Enter number in id")
+      document.getElementById('errorid').textContent = "ID required"
+      flag = false; 
+     } 
+    else if(isNaN(id)){
+      document.getElementById('errorid').textContent = "Please write number"
+      flag = false;
+    }else if(id !== ""){
+      document.getElementById('errorid').textContent = ""
     }
-    if(pname==""){
-      alert("Name required");
-      return false;    
-    }
-    if(price==""){
-      alert("Price required");
-      return false;    
-    }else if(isNaN(price)){
-      alert("Enter number in price")
-    }
-    if(photo==""){
-      alert("Photo required");
-      return false;    
+    for (let prod of product) {
+        if (id === prod.id) {
+          document.getElementById('errorid').textContent = "ID already exists";
+          flag = false;
+        }
     }
     
-    return true;
+    if(pname==""){
+      document.getElementById('errorname').textContent = "Name required"
+      flag = false;    
+    }else if(pname !== ""){
+      document.getElementById('errorname').textContent = ""
+    }
+    if(price==""){
+      document.getElementById('errorprice').textContent = "Price required"
+      flag = false;    
+    }else if(isNaN(price)){
+      document.getElementById('errorprice').textContent = "Please write number"
+      flag = false;
+    }else if(price !== ""){
+      document.getElementById('errorprice').textContent = ""
+    }
+    if(pdescription==""){
+      document.getElementById('errordesc').textContent = "Description required"
+      flag = false;    
+    }else if(pdescription !== ""){
+      document.getElementById('errordesc').textContent = ""
+    }
+    if(photo==""){
+      document.getElementById('errorphoto').textContent = "Photo required"
+      flag = false;    
+    }else if(photo !== ""){
+      document.getElementById('errorphoto').textContent = ""
+    }
+    
+    return flag;
 }
 
+//validation2
+function validateForm2(){
+  let id = document.querySelector("#modal_id").value;
+  let pname = document.querySelector("#modal_pname").value;
+  let price = document.querySelector("#modal_price").value;
+  let description = document.querySelector("#modal_description").value;
+  if(id==""){
+    alert("id required");
+    return false;    
+  }else if(isNaN(id)){
+    alert("Enter number in id")
+    return false;
+  
+  }
+  if(pname==""){
+    alert("Name required");
+    return false;    
+  }
+  if(price==""){
+    alert("Price required");
+    return false;    
+  }else if(isNaN(price)){
+    alert("Enter number in price")
+  }
+  if(description==""){
+    alert("Description required");
+    return false;    
+  }
+  
+  return true;
+}
 //inserting data
 function addData() {
-  if(validateForm() == true){
+  if(validateForm()){
   var product;
   if (localStorage.getItem('productArray') == null) {
     product = [];
@@ -52,7 +115,7 @@ function addData() {
     id: pId.value,
     name: pName.value,
     price: pPrice.value,
-    description: pDescription,
+    description: pDescription.value,
     photo: photos,
     
   });
@@ -60,6 +123,7 @@ function addData() {
   localStorage.setItem('productArray', JSON.stringify(product));
 
   location.reload();
+  location.href = 'index.html'
 });
 }
 }
@@ -85,7 +149,7 @@ function viewData(){
         html += `<td>${element.price}</td>`
         html += `<td>${element.description}</td>`
         html += `<td><div style="width:150px; height:100px;"><img style="max-width: 100%; max-height:100%;" src="${element.photo}"/></div></td>`
-        html += `<td><button type="button" class="btn btn-primary" onclick='updateData(${index})'><i class="fa fa-pencil" aria-hidden="true"></i></button></td>`
+        html += `<td><button type="button" class="btn btn-primary" onclick='updateData(${index})' data-bs-toggle="modal" data-bs-target="#editModal"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>`
         html += `<td><button type="button" class="btn btn-danger" onclick='deleteData(${index})'><i class="fa fa-trash" aria-hidden="true"></i></button></td>`
         html += `</tr>`
 
@@ -114,28 +178,34 @@ function deleteData(index){
     location.reload();
   }
 }
- 
+
+function clear1(){
+  document.querySelector("#id").value = '';
+  document.querySelector("#pname").value = '';
+  document.querySelector("#price").value = '';
+  document.querySelector("#photo").value = '';
+  document.querySelector("#description").value = '';
+}
 // take the data itno the form
 function updateData(index) {
-    document.getElementById('submit').style.display = "none";
-   document.getElementById('update').style.display = "block";
     let productInfo = JSON.parse(localStorage.getItem('productArray'))[index];
-    document.getElementById('id').value = productInfo.id;
-    document.getElementById('pname').value = productInfo.name;
+    document.getElementById('modal_id').value = productInfo.id;
+    document.getElementById('modal_pname').value = productInfo.name;
     editImage = productInfo.photo;
-    document.getElementById('price').value = productInfo.price;
-    document.getElementById('description').value = productInfo.description;
+    document.getElementById('modal_price').value = productInfo.price;
+    document.getElementById('modal_description').value = productInfo.description;
     editIndex = index;
 }
 //after changing, update the data
-function save()
+function saved()
 {
+  if(validateForm2() == true){
     let idx = editIndex;
-    let id = document.getElementById('id').value;
-    let name = document.getElementById('pname').value;
-    let photo = document.getElementById('photo');
-    let price = document.getElementById('price').value;
-    let description = document.getElementById('description').value;
+    let id = document.getElementById('modal_id').value;
+    let name = document.getElementById('modal_pname').value;
+    let photo = document.getElementById('modal_photo');
+    let price = document.getElementById('modal_price').value;
+    let description = document.getElementById('modal_description').value;
     
     
     if (photo.value != '') {
@@ -156,20 +226,22 @@ function save()
     }
     editIndex = null;
     location.reload();
-  }
-
+}
+}
 //search by product id
 function searchid(){
-  var input, filter, table, tr, td, i, txtValue;
+  var input, filter, table, tr, td, td1, i, txtValue, txtValue1;
   input = document.getElementById("searchbar");
   filter = input.value.toUpperCase();
   table = document.getElementById("sort-table");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
+    td = tr[i].getElementsByTagName("td")[1];
+    td1 = tr[i].getElementsByTagName("td")[3];
+    if (td || td1) {
       txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      txtValue1 = td1.textContent || td1.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
@@ -180,7 +252,7 @@ function searchid(){
 
 //sort the columns
 function asc(n){
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("sort-table");
   switching = true;
   dir = "asc"; 
