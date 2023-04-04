@@ -19,7 +19,7 @@
     <body class="bg-dark d-flex justify-content-center">
         <div class="card mb-3 bg-dark"  style="width: 50rem;">
             <div class="card-body">
-                <h4 class="text-white card-title mb-4">Add Products<button class="btn btn-info" style="margin-left: 490px;"onclick="location.href='index.html'">View Products</button></h4>
+                <h4 class="text-white card-title mb-4">Add Products<button class="btn btn-info" style="float: right;"onclick="location.href='index.html'">View Products</button></h4>
             <form id="details">
             <div class="input-group">
                 <span class="input-group-text">Product ID    </span>
@@ -35,7 +35,7 @@
             </div><div id="errorprice"></div><br>
             <div class="input-group">
                 <span class="input-group-text">Product Photo</span>
-                <input type="file" aria-label="product photo" class="form-control" id="photo">
+                <input type="file" aria-label="product photo" class="form-control" id="photo" action="image/*" onchange="imageValidation()">
             </div><div id="errorphoto"></div><br>
             <div class="input-group">
                 <span class="input-group-text">Product Description</span>

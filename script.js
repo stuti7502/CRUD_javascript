@@ -65,7 +65,16 @@ function validateForm(){
     
     return flag;
 }
-
+function imageValidation() {
+  var fileInput = document.getElementById("photo");
+  var filePath = fileInput.value;
+   var allowedExtensions = /(\.jpeg|\.jpg|\.png|\.jfif)$/i;
+   if (!allowedExtensions.exec(filePath)) {
+   alert("Only jpeg , jpg , jfif and png file allowed");
+   fileInput.value = "";
+   return false;
+   }
+  }
 //validation2
 function validateForm2(){
   let id = document.querySelector("#modal_id").value;
